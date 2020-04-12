@@ -10,13 +10,13 @@ class SegmentTree{
     int leftChild(int i){ return 2*i+1;}
     int rightChild(int i){ return 2*i+2;}
 
-    void updateSum(int tree_ind, int tl, int tr, int qi, int diff);
-    int querySum(int tree_ind, int tl, int tr, int ql, int qr);
+    void updateSum(int node, int tl, int tr, int qi, int diff);
+    int querySum(int node, int tl, int tr, int ql, int qr);
 
 
     public:
         SegmentTree(int *arr, int n);
-        int constructTree(int tree_ind,int l, int r);
+        int constructTree(int node,int l, int r);
         int query(int l, int r);
         void updateValue(int ind , int new_val);
         void printTree(){
@@ -35,39 +35,36 @@ SegmentTree::SegmentTree(int *arr, int n){
     constructTree(0,0,n-1);
 
     printTree();
-
 }
 
 
-
-int SegmentTree:: constructTree(int tree_ind,int l, int r){
+int SegmentTree:: constructTree(int node,int l, int r){
     if(l==r) {
-        tree[tree_ind] = arr[l];
+        tree[node] = arr[l];
         return arr[l];
     }
 
     int mid = l + (r-l)/2;
 
-    int left_child = leftChild(tree_ind);
-    int right_child = rightChild(tree_ind);
-
+    int left_child = leftChild(node);
+    int right_child = rightChild(node);
 
     int l_sum = constructTree(left_child,l,mid);
     int r_sum = constructTree(right_child,mid+1,r);
 
-    tree[tree_ind] = l_sum + r_sum;
-    return tree[tree_ind];
+    tree[node] = l_sum + r_sum;
+    return tree[node];
 }
 
-int SegmentTree:: querySum(int tree_ind, int tl, int tr, int ql, int qr){
-    if(tl>=ql && tr<=qr) return tree[tree_ind];
+int SegmentTree:: querySum(int node, int tl, int tr, int ql, int qr){
+    if(tl>=ql && tr<=qr) return tree[node];
 
     if(tr<ql || tl>qr) return 0;
 
     int mid = tl + (tr-tl)/2;
 
-    int left_child = leftChild(tree_ind);
-    int right_child = rightChild(tree_ind);
+    int left_child = leftChild(node);
+    int right_child = rightChild(node);
 
     int l_sum = querySum(left_child,tl,mid,ql,qr);
     int r_sum = querySum(right_child,mid+1,tr,ql,qr);
@@ -75,16 +72,16 @@ int SegmentTree:: querySum(int tree_ind, int tl, int tr, int ql, int qr){
     return l_sum + r_sum;
 }
 
-void SegmentTree:: updateSum(int tree_ind, int tl, int tr, int qi, int diff){
+void SegmentTree:: updateSum(int node, int tl, int tr, int qi, int diff){
     if(qi < tl || qi > tr) return;
 
-    tree[tree_ind] += diff;
+    tree[node] += diff;
 
     if(tl != tr){
         int mid = tl + (tr-tl)/2;
 
-        int left_child = leftChild(tree_ind);
-        int right_child = rightChild(tree_ind);
+        int left_child = leftChild(node);
+        int right_child = rightChild(node);
 
         updateSum(left_child,tl,mid,qi,diff);
         updateSum(right_child,mid+1,tr,qi,diff);
@@ -103,18 +100,20 @@ void SegmentTree::updateValue(int ind, int new_val){
 }
 
 int main(){
-        int arr[] = {5,3,1,7,9};
+        int arr[] = {5,3,1,7,9,0,2,1};
         int n = sizeof(arr)/sizeof(int);
-
+       
         SegmentTree st(arr,n);
+        // cout<<"\n";
+        // st.printTree();
+        // cout<<"\n";
+
+        
         cout<<endl<<st.query(0,2)<<endl;
         st.updateValue(1,6);
         cout<<endl<<st.query(0,2)<<endl;
 
         st.printTree();
-
-
-
 }
 
 

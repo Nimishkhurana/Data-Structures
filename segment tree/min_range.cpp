@@ -40,7 +40,6 @@ SegmentTree::SegmentTree(int *arr, int n){
 }
 
 
-
 int SegmentTree:: constructTree(int tree_ind,int l, int r){
     if(l==r) {
         tree[tree_ind] = arr[l];
@@ -107,15 +106,15 @@ void SegmentTree::updateValue(int ind, int new_val){
 }
 
 int main(){
-        int arr[] = {3,1,7,9,-5,100,5,15};
-        int n = sizeof(arr)/sizeof(int);
+    int arr[] = {3,1,7,9,-5,100,5,15};
+    int n = sizeof(arr)/sizeof(int);
 
-        SegmentTree st(arr,n);
-        cout<<endl<<"Min="<<st.query(0,2)<<endl;
-        st.updateValue(4,10);
-        cout<<endl<<"Min="<<st.query(0,2)<<endl;
+    SegmentTree st(arr,n);
+    cout<<endl<<"Min="<<st.query(0,2)<<endl;
+    st.updateValue(4,10);
+    cout<<endl<<"Min="<<st.query(0,2)<<endl;
 
-        st.printTree();
+    st.printTree();
 
 }
 

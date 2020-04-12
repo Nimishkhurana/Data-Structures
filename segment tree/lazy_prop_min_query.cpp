@@ -11,13 +11,13 @@ class SegmentTree{
     int leftChild(int i){ return 2*i+1;}
     int rightChild(int i){ return 2*i+2;}
 
-    void updateMin(int ind, int tl, int tr, int qi,int qr, int diff);
-    int queryMin(int ind, int tl, int tr, int ql, int qr);
+    void updateMin(int node, int tl, int tr, int ql,int qr, int diff);
+    int queryMin(int node, int tl, int tr, int ql, int qr);
 
 
     public:
         SegmentTree(int *arr, int n);
-        int constructTree(int ind,int l, int r);
+        int constructTree(int node,int l, int r);
         int query(int l, int r);
         void updateValue(int l,int r, int new_val);
         void printTree(){
@@ -47,57 +47,54 @@ SegmentTree::SegmentTree(int *arr, int n){
 }
 
 
-
-int SegmentTree:: constructTree(int ind,int l, int r){
+int SegmentTree:: constructTree(int node,int l, int r){
     if(l==r) {
-        tree[ind] = arr[l];
+        tree[node] = arr[l];
         return arr[l];
     }
 
     int mid = l + (r-l)/2;
 
-    int l_child = leftChild(ind);
-    int r_child = rightChild(ind);
+    int l_child = leftChild(node);
+    int r_child = rightChild(node);
 
 
     int l_min = constructTree(l_child,l,mid);
     int r_min = constructTree(r_child,mid+1,r);
 
-    tree[ind] = min(l_min, r_min);
-    return tree[ind];
+    tree[node] = min(l_min, r_min);
+    return tree[node];
 }
 
-int SegmentTree:: queryMin(int ind, int tl, int tr, int ql, int qr){
+int SegmentTree:: queryMin(int node, int tl, int tr, int ql, int qr){
 
     if(tl > tr) return INT_MAX;
 
-
     // Pending Updates
-    if(lazy[ind]){
-        tree[ind]+=lazy[ind];
+    if(lazy[node]){
+        tree[node]+=lazy[node];
         if(tl!=tr){
-            int l_child = leftChild(ind);
-            int r_child = rightChild(ind);
+            int l_child = leftChild(node);
+            int r_child = rightChild(node);
 
-            lazy[l_child] += lazy[ind];
-            lazy[r_child] += lazy[ind];
+            lazy[l_child] += lazy[node];
+            lazy[r_child] += lazy[node];
         }
-        lazy[ind] = 0;
+        lazy[node] = 0;
     }
 
     // No overlap
     if(tr<ql || tl>qr) return INT_MAX;
 
     // Total Overlap
-    if(tl>=ql && tr<=qr) return tree[ind];
+    if(tl>=ql && tr<=qr) return tree[node];
 
-    
     // Partial Overlap
     if(tl!=tr){
         int mid = tl + (tr-tl)/2;
 
-        int l_child = leftChild(ind);
-        int r_child = rightChild(ind);
+        int l_child = leftChild(node);
+        int r_child = rightChild(node);
 
         int l_min = queryMin(l_child,tl,mid,ql,qr);
         int r_min = queryMin(r_child,mid+1,tr,ql,qr);
@@ -106,21 +103,21 @@ int SegmentTree:: queryMin(int ind, int tl, int tr, int ql, int qr){
     }
 }
 
-void SegmentTree:: updateMin(int ind, int tl, int tr, int ql, int qr, int diff){
+void SegmentTree:: updateMin(int node, int tl, int tr, int ql, int qr, int diff){
 
     if(tl > tr) return;
 
     // Pending Updates
-    if(lazy[ind]){
-        tree[ind]+=lazy[ind];
+    if(lazy[node]){
+        tree[node]+=lazy[node];
         if(tl!=tr){
-            int l_child = leftChild(ind);
-            int r_child = rightChild(ind);
+            int l_child = leftChild(node);
+            int r_child = rightChild(node);
 
-            lazy[l_child] += lazy[ind];
-            lazy[r_child] += lazy[ind];
+            lazy[l_child] += lazy[node];
+            lazy[r_child] += lazy[node];
         }
-        lazy[ind] = 0;
+        lazy[node] = 0;
     }
 
     // Completely out of range
@@ -129,31 +126,29 @@ void SegmentTree:: updateMin(int ind, int tl, int tr, int ql, int qr, int diff){
     // Completely in the range
     if(tl >= ql && tr <= qr){
 
-        tree[ind]+=diff;
+        tree[node]+=diff;
 
         if(tl!=tr){
-            int l_child = leftChild(ind);
-            int r_child = rightChild(ind);
+            int l_child = leftChild(node);
+            int r_child = rightChild(node);
 
             lazy[l_child] += diff;
             lazy[r_child] += diff;
         }
-        cout<<"\nTree ind: "<<ind<<endl;
+        cout<<"\nTree node: "<<node<<endl;
         return;
     }
     
     //Partial Overlap
     int mid = tl + (tr-tl)/2;
 
-    int l_child = leftChild(ind);
-    int r_child = rightChild(ind);
+    int l_child = leftChild(node);
+    int r_child = rightChild(node);
 
     updateMin(l_child,tl,mid,ql,qr,diff);
     updateMin(r_child,mid+1,tr,ql,qr,diff);
 
-    tree[ind] = min(tree[l_child],tree[r_child]);
-    
-    
+    tree[node] = min(tree[l_child],tree[r_child]);
 }
 
 int SegmentTree::query(int l, int r){
@@ -180,7 +175,6 @@ int main(){
 
         cout<<endl<<"Min="<<st.query(3,5)<<endl; 
         st.printTree(); 
-
 }
 
 
