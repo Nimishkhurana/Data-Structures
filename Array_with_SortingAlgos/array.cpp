@@ -58,8 +58,9 @@ void Array::selectionsort()
 }
 void Array::bubblesort()
 {
+    int flag;
     for(int i=0;i<size;i++)
-    {
+    {   flag = 0;
         for(int j=0;j<size-1-i;j++)
         {
             if(a[j] > a[j+1])
@@ -67,8 +68,14 @@ void Array::bubblesort()
                 int temp = a[j];
                 a[j] = a[j+1];
                 a[j+1] = temp;
+                flag = 1;
             }
-        }}
+        }
+        if(flag == 0)
+        {
+            break;
+        }
+    }
 }
 
 void Array::insertionSort()
