@@ -38,7 +38,7 @@ SegmentTree::SegmentTree(int *arr, int n){
 }
 
 
-int SegmentTree:: constructTree(int node,int l, int r){
+int SegmentTree:: constructTree(int node, int l, int r){
     if(l==r) {
         tree[node] = arr[l];
         return arr[l];
