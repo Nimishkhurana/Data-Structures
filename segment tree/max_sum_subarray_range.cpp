@@ -9,9 +9,6 @@ using namespace std;
 #define mk make_pair
 #define fastIO ios_base::sync_with_stdio(false); cin.tie(NULL);
 
-struct Node{
-    ll total, prefix, suffix, subsum; 
-};
 
 ostream& operator << (ostream& stream, const Node &n) {
     return stream<<"("<<n.total<<","<<n.prefix<<","<<n.suffix<<","<<n.subsum<<")\n";
@@ -21,6 +18,9 @@ const ll mxN = 1e5+1;
 ll n,q, a[mxN];
 
 
+struct Node{
+    ll total, prefix, suffix, subsum; 
+};
 
 class SegmentTree{
     Node tree[4*mxN];

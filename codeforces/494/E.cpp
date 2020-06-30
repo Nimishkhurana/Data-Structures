@@ -62,9 +62,7 @@ int main(){
 
         edges.pb({i, u});
         
-        
         q.insert({distu+1, i});
-        
     }
 
     cerr<<edges.size();
