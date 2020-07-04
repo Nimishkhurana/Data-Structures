@@ -34,6 +34,21 @@ int main(){
     cin>>T;
     while(T--){
         int i, j;
+        ll a, b, c;
+        cin>>a>>b>>c;
+        int ans1 = -1, ans2 = -1;
+        if(a < c){
+            ans1 = 1;
+        }
+        if(c < a*b){
+            ans2 = b;
+        }
+        if(c < a) {
+            ans1 = -1;
+        }
+
+        cout<<ans1<<" "<<ans2<<"\n";
+        
     }
    
     return 0;

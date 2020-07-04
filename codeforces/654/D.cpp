@@ -33,7 +33,29 @@ int main(){
     int T;
     cin>>T;
     while(T--){
-        int i, j;
+        int i, j, n, k;
+        cin>>n>>k;
+
+        int a[n][n], cnt = 0;
+        memset(a, 0, sizeof(a));
+      
+        bool done = 0;
+        for(int g = 0; g < n; g++) {
+            for(int i = 0; i < n; i++) {
+                if(cnt < k) {
+                   a[i][(i+g)%n] = 1;
+                   cnt++;
+                }
+            }
+        }
+
+        cout<<2*(k%n!=0)<<'\n';
+        rep(i, 0, n){
+            rep(j, 0, n){
+                cout<<a[i][j];
+            }
+            cout<<"\n";
+        }
     }
    
     return 0;

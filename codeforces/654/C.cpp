@@ -34,6 +34,14 @@ int main(){
     cin>>T;
     while(T--){
         int i, j;
+        ll a, b, n, m;
+        cin>>a>>b>>n>>m;
+        if(a+b >= n+m && min(a,b) >= m) {
+            cout<<"YES\n";
+        }
+        else{
+            cout<<"NO\n";
+        }
     }
    
     return 0;

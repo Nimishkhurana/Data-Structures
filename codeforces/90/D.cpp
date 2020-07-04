@@ -22,6 +22,17 @@ ostream& operator << (ostream& stream, const pair<T,T> &p) {
     return stream<<"("<<p.first<<","<<p.second<<") ";
 }
 
+ll mss(vl &v) {
+    ll ans = 0, cur = 0;
+    int i;
+    rep(i, 0, (int)v.size()) {
+        cur = max(cur + v[i], v[i]);
+        cur = max(0LL, cur);
+        ans = max(cur, ans);
+    }
+    return ans;
+}
+
 
 int main(){
     fastIO
@@ -33,7 +44,31 @@ int main(){
     int T;
     cin>>T;
     while(T--){
-        int i, j;
+        int i, j, n;
+        cin>>n;
+        ll a[n];
+        vl v1, v2;
+        ll ans = 0;
+        rep(i, 0, n) {
+            cin>>a[i];
+            if(i%2==0) ans += a[i];
+        }
+        for(i = 0; i < n-1; i+=2) {
+            v1.pb(a[i+1] - a[i]);
+        }
+        for(i = 1; i < n-1; i+=2) {
+            v2.pb(a[i] - a[i+1]);
+        }
+
+        // for(int x: v1) cerr<<x<<" ";
+        // cerr<<"\n";
+
+        // for(int x: v2) cerr<<x<<" ";
+        // cerr<<"\n";
+
+        // cerr<<ans<<"\n";
+        ans += max(mss(v1), mss(v2));
+        cout<<ans<<"\n";
     }
    
     return 0;

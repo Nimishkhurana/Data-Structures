@@ -15,11 +15,13 @@ using namespace std;
 #define pb push_back
 #define mk make_pair
 #define fastIO ios_base::sync_with_stdio(false); cin.tie(NULL);
-
+#define MOD 1000000007
+#define INF 1000000000
 template <typename T>
 ostream& operator << (ostream& stream, const pair<T,T> &p) {
     return stream<<"("<<p.first<<","<<p.second<<") ";
 }
+
 
 int main(){
     fastIO

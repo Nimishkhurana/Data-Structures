@@ -33,7 +33,9 @@ int main(){
     int T;
     cin>>T;
     while(T--){
-        int i, j;
+        int i, j, n;
+        cin>>n;
+        cout<<(n+1)/2<<"\n";
     }
    
     return 0;

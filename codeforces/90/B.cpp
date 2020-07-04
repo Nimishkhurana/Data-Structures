@@ -34,6 +34,25 @@ int main(){
     cin>>T;
     while(T--){
         int i, j;
+        string s;
+        cin>>s;
+        int n = s.length();
+
+        int cnt = 0;
+        int zeroes = 0, ones = 0;
+        rep(i, 0, n) {
+            if(s[i] == '0') {
+                if(ones) ones--, cnt++;
+                else zeroes++;
+            }
+            if(s[i] == '1') {
+                if(zeroes) zeroes--, cnt++;
+                else ones++;
+            }
+        }
+
+        cerr<<cnt<<"\n";
+        cout<<(cnt&1?"DA\n": "NET\n");
     }
    
     return 0;

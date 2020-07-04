@@ -34,6 +34,22 @@ int main(){
     cin>>T;
     while(T--){
         int i, j;
+        string s;
+        cin>>s;
+        int cur = 0;
+        int diff = 0;
+        ll ans = 0;
+        rep(i, 0, (int)s.length()) {
+            if(s[i] == '+') diff++;
+            else diff--;
+            if(diff < 0) {
+                ans += max(0, (i+1)*(abs(diff+1) - cur + 1));
+                cur = max(cur, abs(diff+1)+1);
+            }
+            // cerr<<cur<<" "<<ans<<"  ";
+        }
+        // cerr<<"\n";
+        cout<<ans+(int)s.length()<<"\n";
     }
    
     return 0;

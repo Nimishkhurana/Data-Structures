@@ -34,6 +34,18 @@ int main(){
     cin>>T;
     while(T--){
         int i, j;
+        ll n, r, ans = 0;
+        cin>>n>>r;
+
+        auto nsum = [&] (ll x) {
+            return (x*(x+1))/2;
+        };
+
+       
+        if(r >= n) ans++;
+        ans += nsum(min(n,r+1)-1);
+        cout<<ans<<"\n";
+        
     }
    
     return 0;
