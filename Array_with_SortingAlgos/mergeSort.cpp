@@ -23,10 +23,10 @@ void Merge(int a[],int p,int q,int r){
     for(int i=0;i<n1;i++)
         L[i] = a[p+i];
     for(int j=0;j<n2;j++)
-        R[j] = a[q+j +1];
+        R[j] = a[q+j+1];
 
     int i=0,j=0,k;
-    for(k=p; i<n1 && j<n2; k++){
+    for(k=p; i<n1 && j<n2; k++) {
         if(L[i]<R[j]){
             a[k] = L[i];
             i++;

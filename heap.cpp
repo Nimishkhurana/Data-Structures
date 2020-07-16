@@ -40,7 +40,7 @@ void MinHeap::swap(int *x,int *y){
 
 
 void MinHeap::minHeapify(int i){
-    if(size==0) return ;
+    if(size==0) return;
 
     int smallest = i;
     int l = left(i),r=right(i);

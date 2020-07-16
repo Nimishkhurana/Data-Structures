@@ -66,7 +66,7 @@ public:
             T = getNode(data);
         }
         else{
-            if(data< T->info)
+            if(data < T->info)
                 T->left = insertInTree(T->left,data);
             else
                 T->right = insertInTree(T->right,data);
@@ -287,8 +287,6 @@ public:
         if(r->right == NULL){
             cout<<"Max = "<<r->info<<endl;
             return;
-
-
         }
         findMax(r->right);
     }
@@ -303,7 +301,6 @@ public:
         node *temp = r->right;
         r->right = r->left;
         r->left = temp;
-
     }
 
     //Function to find sum of no. of nodes in even levels

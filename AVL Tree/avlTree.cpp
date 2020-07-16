@@ -122,7 +122,7 @@ node* AVLTree:: insertInAVLTree(node *T,int data){
     return(balanceTree(T,data));
 }
 
-node* AVLTree:: balanceTree(node* T,int data){
+node* AVLTree:: balanceTree(node* T, int data){
     updateHeight(T);
     int balance = getBalance(T);
 
@@ -229,10 +229,6 @@ node* AVLTree:: minValueNode(node* N)
 
     return N;
 }
-
-
-
-
 
 int main(){
     AVLTree tree;

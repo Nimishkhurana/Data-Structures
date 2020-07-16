@@ -20,7 +20,7 @@ StackArray::StackArray()
     top = -1;
 }
 
-void StackArray::push(int data,bool flag )
+void StackArray::push(int data,bool flag)
 {
     if(!flag){
         cout<<"Enter data to push: ";

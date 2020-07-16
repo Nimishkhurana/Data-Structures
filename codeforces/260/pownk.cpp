@@ -15,8 +15,7 @@ int powBE(int x, int e){
         if(e&1)
             res = (res*x)%MOD;
         x = (x*x)%MOD;
-        e/=2;
-        
+        e/=2;  
     }
     return res;
 }
