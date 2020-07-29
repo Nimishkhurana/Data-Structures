@@ -22,6 +22,14 @@ ostream& operator << (ostream& stream, const pair<T,T> &p) {
     return stream<<"("<<p.first<<","<<p.second<<") ";
 }
 
+clock_t time_c=clock();
+ 
+void timeElapsed() {
+    time_c = clock()-time_c;
+    cerr<< " Time : "<<(float)(time_c)/CLOCKS_PER_SEC<<"\n";
+}
+
+
 
 int main(){
     fastIO
